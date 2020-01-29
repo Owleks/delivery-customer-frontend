@@ -3,19 +3,23 @@ import React, {createContext, useEffect, useState} from 'react';
 export const AppContext = createContext({
     menus: [],
     menu: [],
-    orders: {}
+    orders: {},
+    isBasketDialogOpened: false
 });
 const AppContextProvider = ({children}) => {
     const [menus, setMenus] = useState([]);
     const [menu, setMenu] = useState([]);
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState({});
+    const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
     const context = {
         setMenus,
         setMenu,
         setOrders,
+        setIsBasketDialogOpened,
         menus,
         menu,
-        orders
+        orders,
+        isBasketDialogOpened
     };
     const onInit = () => {
         try {

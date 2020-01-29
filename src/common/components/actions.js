@@ -1,4 +1,4 @@
-import axios from '../../common/API';
+import axios from '../API';
 
 export const getMenuItems = (params) => {
 // Make a request for a user with a given ID
@@ -11,4 +11,12 @@ export const getMenuItems = (params) => {
             console.log(error);
         })
 
+};
+
+export const placeOrder = (params) => {
+    const restaurantId  = { restaurantId: '5e315ebb189d66a4568479c3'};
+    return axios.post('/order', {
+        ...params,
+        ...restaurantId
+    })
 };

@@ -7,7 +7,7 @@ import {
     Link,
 } from "react-router-dom";
 import {AppContext} from '../../appContext';
-import { getMenuItems } from '../menu-page/actions';
+import {getMenuItems} from '../../common/components/actions';
 import ItemCard from '../../common/components/item-card/component';
 
 const OrderPageComponent = memo(() => {
@@ -19,9 +19,13 @@ const OrderPageComponent = memo(() => {
         })
     };
 
+    const onOrderButtonClick = () => {
+        context.setIsBasketDialogOpened(true);
+    };
+
 
     useEffect(onInit, []);
-    const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0);
+    const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0) || 0;
     if (!context.menu.length) {
         return (
             <>
@@ -37,7 +41,7 @@ const OrderPageComponent = memo(() => {
                 ))
             }
             <Link to='/order'>
-                <Button color="primary" variant="contained" fullWidth> Order now
+                <Button color="primary" variant="contained" onClick={onOrderButtonClick}fullWidth> Order now
                 </Button>
             </Link>
             <div>

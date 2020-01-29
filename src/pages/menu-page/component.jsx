@@ -7,7 +7,7 @@ import {
     Link,
     useParams
 } from "react-router-dom";
-import {getMenuItems} from './actions';
+import {getMenuItems} from '../../common/components/actions';
 import {AppContext} from '../../appContext';
 import ItemCard from '../../common/components/item-card/component';
 
