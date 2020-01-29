@@ -7,13 +7,13 @@ import {
     Link,
 } from "react-router-dom";
 import {AppContext} from '../../appContext';
-import {getMenuItems} from '../menu-items-page/actions';
+import { getMenuItems } from '../menu-page/actions';
 import ItemCard from '../../common/components/item-card/component';
 
 const OrderPageComponent = memo(() => {
     const context = useContext(AppContext);
     const onInit = () => {
-        getMenuItems({restaurantId: '5e3153e2206721a1f5255a04'}).then((menus) => {
+        getMenuItems({restaurantId: '5e315ebb189d66a4568479c3'}).then((menus) => {
             const menusToOrder = menus.filter((item) => !!context.orders[item._id]);
             context.setMenu([...menusToOrder])
         })
@@ -21,7 +21,7 @@ const OrderPageComponent = memo(() => {
 
 
     useEffect(onInit, []);
-    const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0)
+    const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0);
     if (!context.menu.length) {
         return (
             <>

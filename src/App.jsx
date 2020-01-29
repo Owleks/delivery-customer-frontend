@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
 import {
-    BrowserRouter as Router,
-    Route
+
+    BrowserRouter as Router, Route
 } from 'react-router-dom';
 import MenusPageComponent from './pages/menus-page/component';
 import OrderPageComponent from './pages/order-page/component';
-import MenuItemsPageComponent from './pages/menu-items-page/component';
 import DeliveryPageComponent from './pages/delivery-page/component';
 import AppContextProvider from './appContext';
 import BasketDialog from './common/components/basket-dialog/component';
+import MenuPageComponent from './pages/menu-page/component';
+import HeaderComponent from './pages/header/component';
 
 function App() {
     return (
@@ -17,9 +18,10 @@ function App() {
             <AppContextProvider>
                 <Router>
                     <div>
+                        <HeaderComponent />
                         <Route exact path="/" component={MenusPageComponent}>
                         </Route>
-                        <Route path="/menu/:menuId" component={MenuItemsPageComponent}>
+                        <Route path="/menu/:menuId" component={MenuPageComponent}>
                         </Route>
                         <Route path="/order" component={OrderPageComponent}>
                         </Route>

@@ -11,7 +11,7 @@ import {getMenuItems} from './actions';
 import {AppContext} from '../../appContext';
 import ItemCard from '../../common/components/item-card/component';
 
-const MenuItemsPageComponent = memo(() => {
+const MenuPageComponent = memo(() => {
     const context = useContext(AppContext);
     const {menuId} = useParams();
     const onInit = () => {
@@ -38,4 +38,4 @@ const MenuItemsPageComponent = memo(() => {
 });
 
 
-export default MenuItemsPageComponent;
+export default MenuPageComponent;
