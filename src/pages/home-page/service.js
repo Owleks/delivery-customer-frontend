@@ -1,22 +1,23 @@
+import API from '../../common/API';
+
 const MENUS = [
-    {id: 1, name: 'Pizza'},
-    {id: 2, name: 'Beverages'},
-    {id: 3, name: 'Pasta'},
-    {id: 4, name: 'Soups'},
-    {id: 5, name: 'Sushi'},
-    {id: 6, name: 'Snacks'},
+    {_id: 1, name: 'Pizza'},
+    {_id: 2, name: 'Beverages'},
+    {_id: 3, name: 'Pasta'},
+    {_id: 4, name: 'Soups'},
+    {_id: 5, name: 'Sushi'},
+    {_id: 6, name: 'Snacks'},
 ];
 
-let count = 0;
-
-const fetchMenus = () => (
-    new Promise((resolve, reject) => {
-        count === 3 && (count = 0);
-        count++;
-        count === 1 && setTimeout(() => resolve(MENUS), 1000);
-        count === 2 && setTimeout(() => resolve([]), 1000);
-        count === 3 && setTimeout(() => reject({message: 'Some error'}), 1000);
-    })
-);
+const fetchMenus = async () => {
+    let response;
+    try {
+        response = await API.get('menu/?restaurantId=5e315ebb189d66a4568479c3');
+    }
+    catch (e) {
+        console.error(e);
+    }
+    return response.data;
+};
 
 export default { fetchMenus };

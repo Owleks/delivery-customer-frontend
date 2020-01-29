@@ -49,7 +49,7 @@ const HomePage = () => {
 
     const menusElements = menus.map(menu => {
         return (
-            <Link key={menu.id} to={`/menu/${menu.id}`} className={classes.link}>
+            <Link key={menu._id} to={`/menu/${menu._id}`} className={classes.link}>
                 <Card variant="outlined" className={classes.card} display="flex">
                     <CardContent>
                         <b>{menu.name}</b>
