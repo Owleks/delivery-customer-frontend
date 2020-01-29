@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const HomePage = () => {
+const MenusPageComponent = () => {
 
     const classes = useStyles();
     const [menus, setMenus] = useState([]);
@@ -76,4 +76,4 @@ const HomePage = () => {
     )
 };
 
-export default HomePage;
+export default MenusPageComponent;

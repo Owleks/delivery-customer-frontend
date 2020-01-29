@@ -5,9 +5,10 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-import HomePage from './pages/home-page/component';
-import OrderPage from './pages/order-page/component';
-import MenuPage from './pages/menu-page/component';
+import MenusPageComponent from './pages/menus-page/component';
+import OrderPageComponent from './pages/order-page/component';
+import MenuItemsPageComponent from './pages/menu-items-page/component';
+import DeliveryPageComponent from './pages/delivery-page/component';
 import AppContextProvider from './appContext';
 
 function App() {
@@ -19,26 +20,31 @@ function App() {
                         <nav>
                             <ul>
                                 <li>
-                                    <Link to="/">Home</Link>
+                                    <Link to="/">Menus</Link>
                                 </li>
                                 <li>
-                                    <Link to="/menu/:menuId">Menu</Link>
+                                    <Link to="/menu/:menuId">Menu items</Link>
                                 </li>
                                 <li>
-                                    <Link to="/order">Users</Link>
+                                    <Link to="/order">Order</Link>
+                                </li>
+                                <li>
+                                    <Link to="/delivery">Delivery</Link>
                                 </li>
                             </ul>
                         </nav>
                         <Route exact path="/">
-                            <HomePage />
+                            <MenusPageComponent />
                         </Route>
                         <Route path="/menu">
-                            <MenuPage />
+                            <MenuItemsPageComponent />
                         </Route>
                         <Route path="/order">
-                            <OrderPage />
+                            <OrderPageComponent />
                         </Route>
-
+                        <Route path="/delivery">
+                            <DeliveryPageComponent />
+                        </Route>
                     </div>
                 </Router>
             </AppContextProvider>
