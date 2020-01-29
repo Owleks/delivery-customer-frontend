@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import MenusPageComponent from './pages/menus-page/component';
 import OrderPageComponent from './pages/order-page/component';
-import MenuItemsPageComponent from './pages/menu-items-page/component';
+import MenuPageComponent from './pages/menu-page/component';
 import DeliveryPageComponent from './pages/delivery-page/component';
 import AppContextProvider from './appContext';
 
@@ -37,7 +37,7 @@ function App() {
                             <MenusPageComponent />
                         </Route>
                         <Route path="/menu">
-                            <MenuItemsPageComponent />
+                            <MenuPageComponent />
                         </Route>
                         <Route path="/order">
                             <OrderPageComponent />

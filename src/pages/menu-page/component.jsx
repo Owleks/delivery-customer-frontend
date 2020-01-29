@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
 });
 
-const MenuItemsPageComponent = memo(() => {
+const MenuPageComponent = memo(() => {
     const context = useContext(AppContext);
     const classes = useStyles();
 
@@ -84,4 +84,4 @@ const MenuItemsPageComponent = memo(() => {
 });
 
 
-export default MenuItemsPageComponent;
+export default MenuPageComponent;
