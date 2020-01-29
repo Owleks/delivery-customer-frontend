@@ -14,9 +14,7 @@ export const getMenuItems = (params) => {
 };
 
 export const placeOrder = (params) => {
-    const restaurantId  = { restaurantId: '5e315ebb189d66a4568479c3'};
     return axios.post('/order', {
-        ...params,
-        ...restaurantId
+        ...params
     })
 };

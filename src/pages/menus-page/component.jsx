@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {makeStyles, Card, CardContent, CircularProgress, Box} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import MenuService from './service';
+import {AppContext} from '../../appContext';
 
 const useStyles = makeStyles(theme => ({
     centered: {
@@ -28,14 +29,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MenusPageComponent = () => {
-
+    const context = useContext(AppContext);
     const classes = useStyles();
     const [menus, setMenus] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     useEffect(() => {
-        MenuService.fetchMenus()
+        MenuService.fetchMenus({
+            restaurantId: context.restaurantId
+        })
             .then(menus => {
                 setMenus(menus);
             })
@@ -45,7 +48,7 @@ const MenusPageComponent = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [context.restaurantId]);
 
     const menusElements = menus.map(menu => {
         return (

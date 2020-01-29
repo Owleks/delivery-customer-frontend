@@ -13,7 +13,7 @@ import ItemCard from '../../common/components/item-card/component';
 const OrderPageComponent = memo(() => {
     const context = useContext(AppContext);
     const onInit = () => {
-        getMenuItems({restaurantId: '5e315ebb189d66a4568479c3'}).then((menus) => {
+        getMenuItems({restaurantId: context.restaurantId}).then((menus) => {
             const menusToOrder = menus.filter((item) => !!context.orders[item._id]);
             context.setMenu([...menusToOrder])
         })

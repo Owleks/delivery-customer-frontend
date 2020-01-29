@@ -4,13 +4,15 @@ export const AppContext = createContext({
     menus: [],
     menu: [],
     orders: {},
-    isBasketDialogOpened: false
+    isBasketDialogOpened: false,
+    restaurantId: '',
 });
 const AppContextProvider = ({children}) => {
     const [menus, setMenus] = useState([]);
     const [menu, setMenu] = useState([]);
     const [orders, setOrders] = useState({});
     const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
+    const [restaurantId, setRestaurantId] = useState('5e315ebb189d66a4568479c3');
     const context = {
         setMenus,
         setMenu,
@@ -19,7 +21,9 @@ const AppContextProvider = ({children}) => {
         menus,
         menu,
         orders,
-        isBasketDialogOpened
+        isBasketDialogOpened,
+        restaurantId,
+        setRestaurantId
     };
     const onInit = () => {
         try {

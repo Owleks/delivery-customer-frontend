@@ -38,6 +38,7 @@ const BasketDialog = memo((props) => {
             }
         });
         placeOrder({
+            ...{restaurantId: context.restaurantId},
             ...form,
             ...{items: orders}
         }).then(() => {

@@ -1,16 +1,16 @@
 import API from '../../common/API';
 
-const restaurantId = '5e315ebb189d66a4568479c3';
 
-const fetchMenus = async () => {
+const fetchMenus = async (options) => {
     try {
-        const {data: menus} = await API.get(`menu/?restaurantId=${restaurantId}`);
+        const {data: menus} = await API.get(`menu/?restaurantId`, {
+            ...options
+        });
         return menus;
-    }
-    catch ({response: {data: errorMessage} = {}, message, request}) {
+    } catch ({response: {data: errorMessage} = {}, message, request}) {
         throw errorMessage || message || request;
     }
 
 };
 
-export default { fetchMenus };
+export default {fetchMenus};
