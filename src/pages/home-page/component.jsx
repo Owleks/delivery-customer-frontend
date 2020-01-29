@@ -32,7 +32,7 @@ const HomePage = () => {
     const classes = useStyles();
     const [menus, setMenus] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(undefined);
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
     useEffect(() => {
         MenuService.fetchMenus()
@@ -40,7 +40,7 @@ const HomePage = () => {
                 setMenus(menus);
             })
             .catch(err => {
-                setError(err);
+                setErrorMessage(err);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -66,12 +66,12 @@ const HomePage = () => {
                     <CircularProgress />
                 </Box>
             )}
-            {!isLoading && !error && (
+            {!isLoading && !errorMessage && (
                 menusElements.length ?
                     menusElements :
                     <Box className={classes.centered}><b>No menus found</b></Box>
             )}
-            {!isLoading && error && (<Box className={classes.centered}><b>{error.message}</b></Box>)}
+            {!isLoading && errorMessage && (<Box className={classes.centered}><b>{errorMessage}</b></Box>)}
         </>
     )
 };

@@ -9,15 +9,17 @@ const MENUS = [
     {_id: 6, name: 'Snacks'},
 ];
 
+const restaurantId = '5e315ebb189d66a4568479c3';
+
 const fetchMenus = async () => {
-    let response;
     try {
-        response = await API.get('menu/?restaurantId=5e315ebb189d66a4568479c3');
+        const {data: menus} = await API.get(`menu/?restaurantId=${restaurantId}`);
+        return menus;
     }
-    catch (e) {
-        console.error(e);
+    catch ({response: {data: errorMessage} = {}, message, request}) {
+        throw errorMessage || message || request;
     }
-    return response.data;
+
 };
 
 export default { fetchMenus };
