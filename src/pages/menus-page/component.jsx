@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles, Card, CardContent, CircularProgress, Box } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {makeStyles, Card, CardContent, CircularProgress, Box} from "@material-ui/core";
+import {Link} from "react-router-dom";
 import MenuService from './service';
 
 const useStyles = makeStyles(theme => ({

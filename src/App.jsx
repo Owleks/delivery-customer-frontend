@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 import {
     BrowserRouter as Router,
-    Route,
-    Link
+    Route
 } from 'react-router-dom';
 import MenusPageComponent from './pages/menus-page/component';
 import OrderPageComponent from './pages/order-page/component';
 import MenuItemsPageComponent from './pages/menu-items-page/component';
 import DeliveryPageComponent from './pages/delivery-page/component';
 import AppContextProvider from './appContext';
+import BasketDialog from './common/components/basket-dialog/component';
 
 function App() {
     return (
@@ -17,36 +17,17 @@ function App() {
             <AppContextProvider>
                 <Router>
                     <div>
-                        <nav>
-                            <ul>
-                                <li>
-                                    <Link to="/">Menus</Link>
-                                </li>
-                                <li>
-                                    <Link to="/menu/:menuId">Menu items</Link>
-                                </li>
-                                <li>
-                                    <Link to="/order">Order</Link>
-                                </li>
-                                <li>
-                                    <Link to="/delivery">Delivery</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                        <Route exact path="/">
-                            <MenusPageComponent />
+                        <Route exact path="/" component={MenusPageComponent}>
                         </Route>
-                        <Route path="/menu">
-                            <MenuItemsPageComponent />
+                        <Route path="/menu/:menuId" component={MenuItemsPageComponent}>
                         </Route>
-                        <Route path="/order">
-                            <OrderPageComponent />
+                        <Route path="/order" component={OrderPageComponent}>
                         </Route>
-                        <Route path="/delivery">
-                            <DeliveryPageComponent />
+                        <Route path="/delivery" component={DeliveryPageComponent}>
                         </Route>
                     </div>
                 </Router>
+                <BasketDialog />
             </AppContextProvider>
         </>
     );
