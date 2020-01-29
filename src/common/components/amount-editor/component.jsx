@@ -8,7 +8,6 @@ const AmountEditor = memo((props) => {
     let amount = props.amount;
     const onActionClick = (action) => () => {
         const newAmount = action === 'add' ? ++amount : --amount;
-        console.log(newAmount)
         props.onAmountChanged(newAmount, props.id);
     };
     return (
