@@ -1,4 +1,4 @@
-import React, {memo, useContext, useEffect} from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import {
     Button
 } from '@material-ui/core';
@@ -7,8 +7,8 @@ import {
     Link,
     useParams
 } from "react-router-dom";
-import {getMenuItems} from '../../common/components/actions';
-import {AppContext} from '../../appContext';
+import { getMenuItems } from '../../common/components/actions';
+import { AppContext } from '../../appContext';
 import ItemCard from '../../common/components/item-card/component';
 
 const MenuPageComponent = memo(() => {
@@ -26,7 +26,7 @@ const MenuPageComponent = memo(() => {
         <>
             {
                 context.menu.map((item) => (
-                    <ItemCard item={item} />
+                    <ItemCard key={item._id} item={item} />
                 ))
             }
             <Link to='/order'>

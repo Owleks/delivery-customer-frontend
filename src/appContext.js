@@ -12,7 +12,7 @@ const AppContextProvider = ({children}) => {
     const [menu, setMenu] = useState([]);
     const [orders, setOrders] = useState({});
     const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
-    const [restaurantId, setRestaurantId] = useState('5e315ebb189d66a4568479c3');
+    const [restaurantId, setRestaurantId] = useState('5e31ab5bdc8fc230ce6779ce');
     const context = {
         setMenus,
         setMenu,

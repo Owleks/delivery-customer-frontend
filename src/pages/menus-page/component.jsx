@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 const MenusPageComponent = () => {
     const context = useContext(AppContext);
     const classes = useStyles();
-    const [menus, setMenus] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -40,7 +39,7 @@ const MenusPageComponent = () => {
             restaurantId: context.restaurantId
         })
             .then(menus => {
-                setMenus(menus);
+                context.setMenus(menus);
             })
             .catch(err => {
                 setErrorMessage(err);
@@ -50,7 +49,7 @@ const MenusPageComponent = () => {
             });
     }, [context.restaurantId]);
 
-    const menusElements = menus.map(menu => {
+    const menusElements = context.menus.map(menu => {
         return (
             <Link key={menu._id} to={`/menu/${menu._id}`} className={classes.link}>
                 <Card variant="outlined" className={classes.card} display="flex">

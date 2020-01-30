@@ -37,7 +37,7 @@ const OrderPageComponent = memo(() => {
         <>
             {
                 context.menu.map((item) => (
-                    <ItemCard item={item} />
+                    <ItemCard key={item._id} item={item} />
                 ))
             }
             <Link to='/order'>

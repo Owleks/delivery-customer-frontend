@@ -7,7 +7,7 @@ import {AppContext} from '../../../appContext';
 
 const AmountEditor = memo(({id}) => {
     const context = useContext(AppContext);
-    let amount = context.orders[id] || 0;
+    let amount = (context.orders && context.orders[id]) || 0;
 
     const onActionClick = (action) => () => {
         const newAmount = action === 'add' ? ++amount : --amount;
@@ -37,7 +37,7 @@ const AmountEditor = memo(({id}) => {
             <Fab onClick={onActionClick('add')} size="small" color="primary" aria-label="add">
                 <AddIcon />
             </Fab>
-            <Input defaultValue="1" value={amount} disabled style={{width: 20, textAlign: 'center'}} />
+            <Input value={amount} disabled style={{width: 20, textAlign: 'center'}} />
             <Fab onClick={onActionClick('remove')} size="small" color="secondary" aria-label="remove">
                 <RemoveIcon />
             </Fab>
