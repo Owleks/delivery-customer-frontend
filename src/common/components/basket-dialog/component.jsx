@@ -13,7 +13,7 @@ const BasketDialog = memo((props) => {
     customerName: '',
     phoneNumber: '',
     address: '',
-    time: '',
+    deliveryTime: '', // TODO: should be Date, add date picker
     description: '',
   };
   const context = useContext(AppContext);
@@ -45,6 +45,7 @@ const BasketDialog = memo((props) => {
       ...{ items: orders },
     }).then(() => {
       context.setOrders({});
+      localStorage.setItem('orders', JSON.stringify({}));
       context.setIsBasketDialogOpened(false);
       setForm(initialState);
       history.push('/');
@@ -84,7 +85,7 @@ const BasketDialog = memo((props) => {
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="time">Delivery time</InputLabel>
-              <Input onChange={onFormChange('time')} value={form.time} fullWidth id="time" />
+              <Input onChange={onFormChange('deliveryTime')} value={form.deliveryTime} fullWidth id="time" />
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="comment">Comment</InputLabel>
