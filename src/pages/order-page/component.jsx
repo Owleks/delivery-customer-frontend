@@ -3,9 +3,6 @@ import {
     Button
 } from '@material-ui/core';
 
-import {
-    Link,
-} from "react-router-dom";
 import {AppContext} from '../../appContext';
 import {getMenuItems} from '../../common/components/actions';
 import ItemCard from '../../common/components/item-card/component';
@@ -40,10 +37,7 @@ const OrderPageComponent = memo(() => {
                     <ItemCard key={item._id} item={item} />
                 ))
             }
-            <Link to='/order'>
-                <Button color="primary" variant="contained" onClick={onOrderButtonClick}fullWidth> Order now
-                </Button>
-            </Link>
+            <Button color="primary" variant="contained" onClick={onOrderButtonClick}fullWidth> Order now</Button>
             <div>
                 <span>Total:</span><span>{totalCost}</span>
             </div>
