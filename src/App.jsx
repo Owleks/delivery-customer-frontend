@@ -28,8 +28,8 @@ function App() {
                         <Route path="/delivery" component={DeliveryPageComponent}>
                         </Route>
                     </div>
+                    <BasketDialog />
                 </Router>
-                <BasketDialog />
             </AppContextProvider>
         </>
     );
