@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation, useHistory, Link as RouterLink } from 'react-router-dom';
 import { makeStyles, Box, Grid, Button, Divider } from "@material-ui/core";
+
+import { AppContext } from "../../../appContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,12 +20,21 @@ const useStyles = makeStyles(theme => ({
 const HeaderComponent = () => {
   const history = useHistory();
   const { pathname } = useLocation();
+  const context = useContext(AppContext);
   const classes = useStyles();
 
   let headerElements;
 
   if(pathname === '/') {
-    return null;
+    headerElements = (
+      <>
+        <Grid item xs={12}>
+          <b>
+            <h2>{context.restaurantName}</h2>
+          </b>
+        </Grid>
+      </>
+    );
   }
   if(pathname.indexOf('/menu/') === 0) {
     headerElements = (
