@@ -26,7 +26,7 @@ export const fetchMenus = async (options) => {
 };
 
 export const getMenuItems = (params) => {
-// Make a request for a user with a given ID
+  // Make a request for a user with a given ID
   return axios.get('/menu-item', {
     params,
   })

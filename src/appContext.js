@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getRestaurantId } from './common/components/actions';
 import { makeStyles, Box } from '@material-ui/core';
+
+import { getRestaurantId } from './common/components/actions';
 
 const useStyles = makeStyles(theme => ({
   centered: {

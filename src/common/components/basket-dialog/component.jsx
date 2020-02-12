@@ -1,11 +1,12 @@
 import React, { memo, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AppContext } from '../../../appContext';
 import {
   Grid, Button, Dialog, DialogContent,
   DialogTitle, Box, IconButton, Input, InputLabel, FormControl, FormGroup,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+
+import { AppContext } from '../../../appContext';
 import { placeOrder } from '../actions';
 
 const BasketDialog = memo((props) => {
@@ -58,7 +59,7 @@ const BasketDialog = memo((props) => {
       <Dialog fullScreen open={isOpened}>
         <Grid container justify="flex-end">
           <IconButton aria-label="close" onClick={onDialogClose}>
-            <CloseIcon />
+            <CloseIcon/>
           </IconButton>
         </Grid>
         <Grid container justify="center">
@@ -72,25 +73,25 @@ const BasketDialog = memo((props) => {
             <FormControl>
               <InputLabel htmlFor="name">Name</InputLabel>
               <Input onChange={onFormChange('customerName')} value={form.customerName} fullWidth
-                     id="name" />
+                     id="name"/>
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="Phone">Phone</InputLabel>
               <Input onChange={onFormChange('phoneNumber')} value={form.phoneNumber} fullWidth
-                     id="phone" />
+                     id="phone"/>
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="address">Address</InputLabel>
-              <Input onChange={onFormChange('address')} value={form.address} fullWidth id="address" />
+              <Input onChange={onFormChange('address')} value={form.address} fullWidth id="address"/>
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="time">Delivery time</InputLabel>
-              <Input onChange={onFormChange('deliveryTime')} value={form.deliveryTime} fullWidth id="time" />
+              <Input onChange={onFormChange('deliveryTime')} value={form.deliveryTime} fullWidth id="time"/>
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="comment">Comment</InputLabel>
               <Input onChange={onFormChange('description')} value={form.description} fullWidth
-                     id="comment" />
+                     id="comment"/>
             </FormControl>
           </FormGroup>
           <Box m={2}>

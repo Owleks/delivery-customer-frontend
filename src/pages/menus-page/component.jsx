@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { makeStyles, Card, CardContent, CircularProgress, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { makeStyles, Card, CardContent, CircularProgress, Box } from '@material-ui/core';
+
 import { fetchMenus } from '../../common/components/actions';
 import { AppContext } from '../../appContext';
 
@@ -35,7 +36,7 @@ const MenusPageComponent = () => {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    if (context.restaurantId) {
+    if(context.restaurantId) {
       fetchMenus({
         restaurantId: context.restaurantId,
       })
@@ -67,7 +68,7 @@ const MenusPageComponent = () => {
     <>
       {isLoading && (
         <Box className={classes.centered}>
-          <CircularProgress />
+          <CircularProgress/>
         </Box>
       )}
       {!isLoading && !errorMessage && (
