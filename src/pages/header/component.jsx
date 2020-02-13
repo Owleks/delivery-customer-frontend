@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useLocation, useHistory, Link as RouterLink } from 'react-router-dom';
 import { makeStyles, Box, Grid, Button, Divider } from "@material-ui/core";
+import {AppContext} from '../../appContext';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        marginBottom: theme.spacing(2)
-    },
     navigation: {
         padding: theme.spacing(2),
         height: theme.spacing(10),
@@ -16,6 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HeaderComponent = () => {
+    const context = useContext(AppContext);
     const history = useHistory();
     const { pathname } = useLocation();
     const classes = useStyles();
@@ -39,12 +38,14 @@ const HeaderComponent = () => {
         );
     }
     if (pathname === '/order') {
+        const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0) || 0;
         headerElements = (
             <>
                 <Grid item xs={3}>
                     <Button variant="contained" color="primary" onClick={() => history.goBack()}>Back</Button>
                 </Grid>
-                <Grid item xs={9}><b>Your order</b></Grid>
+                <Grid item xs={7}><b>Your order</b></Grid>
+                <Grid item xs={2}><b>Total: {totalCost} UA</b></Grid>
             </>
         );
     }

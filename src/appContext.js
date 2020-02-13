@@ -63,7 +63,7 @@ const AppContextProvider = ({ children }) => {
   return (
     <>
       <AppContext.Provider value={context}>
-        {!errorMessage && children}
+        {!errorMessage && restaurantId && children}
         {errorMessage && <Box className={classes.centered}><b>{errorMessage}</b></Box>}
       </AppContext.Provider>
     </>
