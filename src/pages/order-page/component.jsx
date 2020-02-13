@@ -1,45 +1,68 @@
-import React, { memo, useContext, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import React, {memo, useContext, useEffect, useState} from 'react';
+import {
+    Box, CircularProgress, makeStyles
+} from '@material-ui/core';
 
-import { AppContext } from '../../appContext';
-import { getMenuItems } from '../../common/components/actions';
+import {AppContext} from '../../appContext';
+import {getMenuItems} from '../../common/components/actions';
 import ItemCard from '../../common/components/item-card/component';
+import OrderButton from '../../common/components/orderButton/component';
 
+const useStyles = makeStyles(theme => ({
+    centered: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: -1,
+    }
+}));
 const OrderPageComponent = memo(() => {
-  const context = useContext(AppContext);
-  const onInit = () => {
-    getMenuItems({ restaurantId: context.restaurantId }).then((menus) => {
-      const menusToOrder = menus.filter((item) => !!context.orders[item._id]);
-      context.setMenu([...menusToOrder])
-    })
-  };
+    const classes = useStyles();
+    const context = useContext(AppContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const onInit = () => {
+        setIsLoading(true);
+        getMenuItems({restaurantId: context.restaurantId}).then((menus) => {
+            const menusToOrder = menus.filter((item) => !!context.orders[item._id]);
+            console.log(menus, menusToOrder)
+            context.setMenu([...menusToOrder])
+        }).finally(() => {
+            setIsLoading(false);
+        })
+    };
+    useEffect(onInit, []);
+    const onOrderButtonClick = () => {
+        context.setIsBasketDialogOpened(true);
+    };
 
-  const onOrderButtonClick = () => {
-    context.setIsBasketDialogOpened(true);
-  };
-
-
-  useEffect(onInit, []);
-  const totalCost = context.menu.reduce((acc, cur) => acc + (cur.price * context.orders[cur._id]), 0) || 0;
-  if(!context.menu.length) {
+    if (isLoading) {
+        return (
+            <Box className={classes.centered}>
+                <CircularProgress />
+            </Box>
+        )
+    }
+    if (!context.menu.length) {
+        return (
+            <>
+                <h3> No Orders available! Please Order first </h3>
+            </>
+        );
+    }
     return (
-      <>
-        <h3> No Orders available! Please Order first </h3>
-      </>
-    );
-  }
-  return (
-    <>
-      {
-        context.menu.map((item) => (
-          <ItemCard key={item._id} item={item}/>
-        ))
-      }
-      <Button color="primary" variant="contained" onClick={onOrderButtonClick} fullWidth> Order now</Button>
-      <div>
-        <span>Total:</span><span>{totalCost}</span>
-      </div>
-    </>
-  )
+        <>
+            {
+                context.menu.map((item) => (
+                    <ItemCard key={item._id} item={item} />
+                ))
+            }
+            <OrderButton link="/order" disabled={false} onClick={onOrderButtonClick} />
+        </>
+    )
 });
 export default OrderPageComponent;
