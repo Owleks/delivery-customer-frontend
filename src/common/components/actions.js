@@ -37,6 +37,17 @@ export const getMenuItems = (params) => {
 
 };
 
+export const getMenuName = (params) => {
+  return axios.get('/menu', {
+    params
+  })
+    .then((response) => response.data[0])
+    .catch(function (error) {
+      console.log(error); // TODO: handle error
+    });
+
+};
+
 export const placeOrder = (params) => {
   return axios.post('/order', {
     ...params,

@@ -22,7 +22,6 @@ const HeaderComponent = () => {
   const { pathname } = useLocation();
   const context = useContext(AppContext);
   const classes = useStyles();
-
   let headerElements;
 
   if(pathname === '/') {
@@ -42,7 +41,7 @@ const HeaderComponent = () => {
         <Grid item xs={3}>
           <Button variant="contained" color="primary" component={RouterLink} to="/">Back</Button>
         </Grid>
-        <Grid item xs={6}><b>Menu name</b></Grid>
+        <Grid item xs={6}><b>{context.menuHeaderName}</b></Grid>
         <Grid item xs={3}>
           <Button variant="contained" component={RouterLink} to="/order">Order</Button>
         </Grid>

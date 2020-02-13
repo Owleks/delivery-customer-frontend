@@ -31,6 +31,7 @@ const AppContextProvider = ({ children }) => {
   const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
   const [restaurantId, setRestaurantId] = useState(undefined);
   const [restaurantName, setRestaurantName] = useState(undefined);
+  const [menuHeaderName, setMenuHeaderName] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const context = {
     setMenus,
@@ -43,10 +44,13 @@ const AppContextProvider = ({ children }) => {
     isBasketDialogOpened,
     restaurantId,
     restaurantName,
+    menuHeaderName,
+    setMenuHeaderName,
   };
   const onInit = () => {
     try {
-      setOrders(JSON.parse(localStorage.getItem('orders')));
+      const orders = localStorage.getItem('orders') || {};
+      setOrders(JSON.parse(orders));
     } catch (e) {
     }
   };
@@ -57,6 +61,7 @@ const AppContextProvider = ({ children }) => {
       .then(restaurant => {
         setRestaurantId(restaurant._id);
         setRestaurantName(restaurant.displayName);
+        document.title = restaurant.displayName;
       })
       .catch(e => {
         setErrorMessage('Restaurant not found');
