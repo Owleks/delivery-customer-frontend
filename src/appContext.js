@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getRestaurantId } from './common/components/actions';
 import { makeStyles, Box } from '@material-ui/core';
+
+import { getRestaurantId } from './common/components/actions';
 
 const useStyles = makeStyles(theme => ({
   centered: {
@@ -29,6 +30,7 @@ const AppContextProvider = ({ children }) => {
   const [orders, setOrders] = useState({});
   const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
   const [restaurantId, setRestaurantId] = useState(undefined);
+  const [restaurantName, setRestaurantName] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const context = {
     setMenus,
@@ -40,7 +42,7 @@ const AppContextProvider = ({ children }) => {
     orders,
     isBasketDialogOpened,
     restaurantId,
-    setRestaurantId,
+    restaurantName,
   };
   const onInit = () => {
     try {
@@ -52,8 +54,9 @@ const AppContextProvider = ({ children }) => {
   useEffect(onInit, []);
   useEffect(() => {
     getRestaurantId()
-      .then(restaurantId => {
-        setRestaurantId(restaurantId);
+      .then(restaurant => {
+        setRestaurantId(restaurant._id);
+        setRestaurantName(restaurant.displayName);
       })
       .catch(e => {
         setErrorMessage('Restaurant not found');

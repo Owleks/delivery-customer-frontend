@@ -1,11 +1,11 @@
 import axios from '../API';
 
 export const getRestaurantId = async () => {
-  const [restaurantName] = window.location.hostname.split('.');
+  const [domainName] = window.location.hostname.split('.');
   try {
     const { data: restaurantId } = await axios.get('/restaurant', {
       params: {
-        name: restaurantName,
+        domainName,
       },
     });
     return restaurantId;
@@ -26,7 +26,7 @@ export const fetchMenus = async (options) => {
 };
 
 export const getMenuItems = (params) => {
-// Make a request for a user with a given ID
+  // Make a request for a user with a given ID
   return axios.get('/menu-item', {
     params,
   })
