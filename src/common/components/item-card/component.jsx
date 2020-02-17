@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 import {
   Card,
   CardContent,
@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import AmountEditor from '../amount-editor/component';
+import {ENVIRONMENT} from '../../../environments/environment';
 
 const useStyles = makeStyles({
   media: {
@@ -26,7 +27,7 @@ const ItemCard = memo(({ item }) => {
           <Grid item xs={3}>
             <CardMedia
               className={classes.media}
-              image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+              image={ENVIRONMENT.UPLOADS + item.image}
               title="Contemplative Reptile"
             />
           </Grid>
@@ -41,10 +42,10 @@ const ItemCard = memo(({ item }) => {
             </CardContent>
           </Grid>
           <Grid item xs={5} container alignItems="center" justify="center">
-            <AmountEditor id={item._id}/>
+            <AmountEditor id={item._id} />
           </Grid>
         </Grid>
-        <Divider/>
+        <Divider />
       </Card>
     </>
   )

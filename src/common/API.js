@@ -1,5 +1,6 @@
 import axious from 'axios';
+import {ENVIRONMENT} from '../environments/environment';
 
 export default axious.create({
-    baseURL: 'http://api.besmart.link:3000/'
+  baseURL: ENVIRONMENT.API
 });
