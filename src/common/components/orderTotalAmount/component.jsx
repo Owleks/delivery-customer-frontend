@@ -7,7 +7,11 @@ const OrderTotalAmount = memo(({ id }) => {
   if (!menu.length) {
     return;
   }
-  const totalAmount = menu.reduce((acc, menu) => acc + (menu.price * orders[menu._id]), 0) || 0;
+  const totalAmount = menu.reduce((acc, menu) => {
+    if (!orders[menu._id]) return acc;
+    return acc + (menu.price * orders[menu._id]) || 0;
+  }, 0);
+
   return (
     <>
       {totalAmount}
