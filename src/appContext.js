@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { makeStyles, Box } from '@material-ui/core';
+import React, {createContext, useEffect, useState} from 'react';
+import {makeStyles, Box} from '@material-ui/core';
 
-import { getRestaurantId } from './common/components/actions';
+import {getRestaurantId} from './common/components/actions';
 
 const useStyles = makeStyles(theme => ({
   centered: {
@@ -21,6 +21,7 @@ export const AppContext = createContext({
   menu: [],
   orders: {},
   isBasketDialogOpened: false,
+  isSuccessOrderPopoverOpened: false,
   restaurantId: undefined,
 });
 const AppContextProvider = ({ children }) => {
@@ -29,6 +30,11 @@ const AppContextProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
   const [orders, setOrders] = useState({});
   const [isBasketDialogOpened, setIsBasketDialogOpened] = useState(false);
+  const [isNotificationDialogOpened, setIsNotificationDialogOpened] = useState(false);
+  const [notificationDialogText, setNotificationDialogText] = useState({
+    title: '',
+    header: '',
+  });
   const [restaurantId, setRestaurantId] = useState(undefined);
   const [restaurantName, setRestaurantName] = useState(undefined);
   const [menuHeaderName, setMenuHeaderName] = useState(undefined);
@@ -46,6 +52,10 @@ const AppContextProvider = ({ children }) => {
     restaurantName,
     menuHeaderName,
     setMenuHeaderName,
+    isNotificationDialogOpened,
+    setIsNotificationDialogOpened,
+    notificationDialogText,
+    setNotificationDialogText,
   };
   const onInit = () => {
     try {

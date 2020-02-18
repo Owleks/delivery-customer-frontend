@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './App.css';
 import MenusPageComponent from './pages/menus-page/component';
@@ -9,6 +9,7 @@ import AppContextProvider from './appContext';
 import BasketDialog from './common/components/basket-dialog/component';
 import MenuPageComponent from './pages/menu-page/component';
 import HeaderComponent from './common/components/header/component';
+import NotificationDialog from './common/components/notificationDialog/component';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <AppContextProvider>
         <Router>
           <div>
-            <HeaderComponent/>
+            <HeaderComponent />
             <Route exact path="/" component={MenusPageComponent}>
             </Route>
             <Route path="/menu/:menuId" component={MenuPageComponent}>
@@ -26,7 +27,8 @@ function App() {
             <Route path="/delivery" component={DeliveryPageComponent}>
             </Route>
           </div>
-          <BasketDialog/>
+          <BasketDialog />
+          <NotificationDialog />
         </Router>
       </AppContextProvider>
     </>
