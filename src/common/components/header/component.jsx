@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import { useLocation, useHistory, Link as RouterLink } from 'react-router-dom';
-import { makeStyles, Box, Grid, Button, Divider } from "@material-ui/core";
+import React, {useContext} from 'react';
+import {useLocation, useHistory, Link as RouterLink} from 'react-router-dom';
+import {makeStyles, Box, Grid, Button, Divider} from "@material-ui/core";
 
-import { AppContext } from "../../../appContext";
+import {AppContext} from "../../../appContext";
+import OrderTotalAmount from '../orderTotalAmount/component';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,7 @@ const HeaderComponent = () => {
   const classes = useStyles();
   let headerElements;
 
-  if(pathname === '/') {
+  if (pathname === '/') {
     headerElements = (
       <>
         <Grid item xs={12}>
@@ -35,7 +36,7 @@ const HeaderComponent = () => {
       </>
     );
   }
-  if(pathname.indexOf('/menu/') === 0) {
+  if (pathname.indexOf('/menu/') === 0) {
     headerElements = (
       <>
         <Grid item xs={3}>
@@ -48,17 +49,19 @@ const HeaderComponent = () => {
       </>
     );
   }
-  if(pathname === '/order') {
+  if (pathname === '/order') {
     headerElements = (
       <>
-        <Grid item xs={3}>
-          <Button variant="contained" color="primary" onClick={() => history.goBack()}>Back</Button>
+        <Grid container justify="space-between">
+          <Grid item xs>
+            <Button variant="contained" color="primary" onClick={() => history.goBack()}>Back</Button>
+          </Grid>
+          <Grid item xs={2}><b>Your order: <OrderTotalAmount /></b></Grid>
         </Grid>
-        <Grid item xs={9}><b>Your order</b></Grid>
       </>
     );
   }
-  if(pathname === '/delivery') {
+  if (pathname === '/delivery') {
     headerElements = (
       <>
         <Grid item xs={3}>
@@ -74,7 +77,7 @@ const HeaderComponent = () => {
       <Grid container className={classes.navigation}>
         {headerElements}
       </Grid>
-      <Divider/>
+      <Divider />
     </Box>
   );
 };
