@@ -38,6 +38,9 @@ const ItemCard = ({ item }) => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {item.description}
               </Typography>
+              <Typography variant="body1" component="h3">
+               Price: {item.price}
+              </Typography>
             </CardContent>
           </Grid>
           <Grid item xs={5} container alignItems="center" justify="center">
