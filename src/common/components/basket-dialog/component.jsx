@@ -5,11 +5,12 @@ import {useHistory} from 'react-router-dom';
 import {AppContext} from '../../../appContext';
 import {
   Grid, Dialog, DialogContent,
-  DialogTitle, IconButton, FormControl, FormGroup, TextField,
+  DialogTitle, IconButton, FormControl, FormGroup, TextField, Box,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import {placeOrder} from '../actions';
 import OrderButton from '../orderButton/component';
+import OrderTotalAmount from '../orderTotalAmount/component';
 
 const BasketDialog = memo((props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -112,6 +113,9 @@ const BasketDialog = memo((props) => {
               </FormControl>
             </FormGroup>
           </form>
+          <Box mt={3} />
+          <b>Total amount: <OrderTotalAmount /></b>
+          <Box mt={3} />
           <OrderButton link="/" disabled={false} onClick={handleSubmit((orderForm) => {
             onOrderButtonClick(orderForm)
           })} />
