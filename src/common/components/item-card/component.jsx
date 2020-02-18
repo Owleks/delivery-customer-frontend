@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {
   Card,
   CardContent,
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemCard = memo(({ item }) => {
+const ItemCard = ({ item }) => {
   const classes = useStyles();
 
   return (
@@ -28,7 +28,6 @@ const ItemCard = memo(({ item }) => {
             <CardMedia
               className={classes.media}
               image={ENVIRONMENT.UPLOADS + item.image}
-              title="Contemplative Reptile"
             />
           </Grid>
           <Grid item xs={4}>
@@ -49,6 +48,6 @@ const ItemCard = memo(({ item }) => {
       </Card>
     </>
   )
-});
+};
 
 export default ItemCard;

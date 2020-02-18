@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles, Card, CardContent, CircularProgress, Box } from '@material-ui/core';
+import React, {useContext, useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {makeStyles, Card, CardContent, CircularProgress, Box, CardMedia, Grid} from '@material-ui/core';
 
-import { fetchMenus } from '../../common/components/actions';
-import { AppContext } from '../../appContext';
+import {fetchMenus} from '../../common/components/actions';
+import {AppContext} from '../../appContext';
+import {ENVIRONMENT} from '../../environments/environment';
 
 const useStyles = makeStyles(theme => ({
   centered: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
@@ -23,9 +23,13 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'space-between',
     margin: theme.spacing(2),
-    height: 100,
+    height: 200,
+  },
+  media: {
+    height: 200,
+    width: 200
   },
 }));
 
@@ -36,7 +40,7 @@ const MenusPageComponent = () => {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    if(context.restaurantId) {
+    if (context.restaurantId) {
       fetchMenus({
         restaurantId: context.restaurantId,
       })
@@ -55,9 +59,18 @@ const MenusPageComponent = () => {
   const menusElements = context.menus.map(menu => {
     return (
       <Link key={menu._id} to={`/menu/${menu._id}`} className={classes.link}>
-        <Card variant="outlined" className={classes.card} display="flex">
-          <CardContent>
-            <b>{menu.name}</b>
+        <Card variant="outlined" display="flex">
+          <CardContent className={classes.card}>
+            <Grid xs container>
+              <CardMedia
+                className={classes.media}
+                image={ENVIRONMENT.UPLOADS + menu.image}
+              />
+            </Grid>
+            <Grid container justify="center">
+              <h3>{menu.name}</h3>
+            </Grid>
+
           </CardContent>
         </Card>
       </Link>
@@ -68,7 +81,7 @@ const MenusPageComponent = () => {
     <>
       {isLoading && (
         <Box className={classes.centered}>
-          <CircularProgress/>
+          <CircularProgress />
         </Box>
       )}
       {!isLoading && !errorMessage && (

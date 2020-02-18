@@ -29,7 +29,6 @@ const OrderPageComponent = memo(() => {
         setIsLoading(true);
         getMenuItems({restaurantId: context.restaurantId}).then((menus) => {
             const menusToOrder = menus.filter((item) => !!context.orders[item._id]);
-            console.log(menus, menusToOrder)
             context.setMenu([...menusToOrder])
         }).finally(() => {
             setIsLoading(false);
