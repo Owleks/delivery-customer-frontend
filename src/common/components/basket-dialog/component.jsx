@@ -1,22 +1,32 @@
-import React, {memo, useContext} from 'react';
+import React, { memo, useContext } from 'react';
 
-import {useForm} from 'react-hook-form';
-import {useHistory} from 'react-router-dom';
-import {AppContext} from '../../../appContext';
+import { useForm, Controller, ErrorMessage } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { AppContext } from '../../../appContext';
 import {
-  Grid, Dialog, DialogContent,
-  DialogTitle, IconButton, FormControl, FormGroup, TextField, Box,
+  Grid,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  FormControl,
+  FormGroup,
+  TextField,
+  Box,
+  FormHelperText,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import {placeOrder} from '../actions';
+import { placeOrder } from '../actions';
 import OrderButton from '../orderButton/component';
 import OrderTotalAmount from '../orderTotalAmount/component';
+import DateTimePickerComponent from '../date-time-picker/component';
 
 const BasketDialog = memo((props) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control } = useForm();
   const context = useContext(AppContext);
   const history = useHistory();
   const isOpened = context.isBasketDialogOpened;
+  const hourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
   const onDialogClose = () => {
     context.setIsBasketDialogOpened(false);
@@ -37,13 +47,13 @@ const BasketDialog = memo((props) => {
       localStorage.setItem('orders', JSON.stringify({}));
       context.setNotificationDialogText({
         header: 'Order successfully placed',
-        text: 'Your order has been placed successfully! Please wait for phone call!'
+        text: 'Your order has been placed successfully! Please wait for phone call!',
       });
       history.push('/');
     }).catch(() => {
       context.setNotificationDialogText({
         header: 'Oops!',
-        text: 'Something went wrong! Please try again later!'
+        text: 'Something went wrong! Please try again later!',
       });
     }).finally(() => {
       context.setIsNotificationDialogOpened(true);
@@ -93,12 +103,24 @@ const BasketDialog = memo((props) => {
                            inputRef={register({ required: true })} />
               </FormControl>
               <FormControl>
-                <TextField name="deliveryTime"
-                           fullWidth
-                           label="Delivery Time:"
-                           error={!!errors.deliveryTime}
-                           helperText={errors.deliveryTime?.type}
-                           inputRef={register({ required: true })} />
+                <Controller
+                  as={DateTimePickerComponent}
+                  name="deliveryTime"
+                  control={control}
+                  date={hourFromNow}
+                  defaultValue={hourFromNow}
+                  onChange={([date]) => date}
+                  helperText={errors.deliveryTime?.type}
+                  rules={{
+                    validate: newDate => newDate.getTime() >= hourFromNow.getTime(),
+                  }}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="deliveryTime"
+                  as={<FormHelperText error={true} />}
+                  message="Selected time should not be less than one hour from the current time"
+                />
               </FormControl>
               <FormControl>
                 <TextField name="description"
@@ -117,7 +139,7 @@ const BasketDialog = memo((props) => {
           <b>Total amount: <OrderTotalAmount /></b>
           <Box mt={3} />
           <OrderButton link="/" disabled={false} onClick={handleSubmit((orderForm) => {
-            onOrderButtonClick(orderForm)
+            onOrderButtonClick(orderForm);
           })} />
         </DialogContent>
       </Dialog>
