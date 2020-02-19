@@ -61,7 +61,7 @@ const MenusPageComponent = () => {
       <Link key={menu._id} to={`/menu/${menu._id}`} className={classes.link}>
         <Card variant="outlined" display="flex">
           <CardContent className={classes.card}>
-            <Grid xs container>
+            <Grid xs container item>
               <CardMedia
                 className={classes.media}
                 image={ENVIRONMENT.UPLOADS + menu.image}
