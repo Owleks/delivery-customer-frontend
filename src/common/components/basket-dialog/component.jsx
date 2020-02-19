@@ -110,7 +110,6 @@ const BasketDialog = memo((props) => {
                   date={hourFromNow}
                   defaultValue={hourFromNow}
                   onChange={([date]) => date}
-                  helperText={errors.deliveryTime?.type}
                   rules={{
                     validate: newDate => newDate.getTime() >= hourFromNow.getTime(),
                   }}
